@@ -97,7 +97,7 @@ RList *mem (RBinFile *arch) {
 		return ret;
 	m->name = strdup ("xram");
 	m->addr = 0x80;
-	m->size = 0x6F;
+	m->size = 0x7F;
 	m->perms = r_str_rwx ("rwx");
 	r_list_append (ret, m);
 
