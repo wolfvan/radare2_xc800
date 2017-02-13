@@ -77,6 +77,34 @@ static RList* sections(RBinFile *arch){
         return ret;
 }
 
+RList *mem (RBinFile *arch) {
+	RList *ret;
+	RBinMem *m, *n;
+	if (!(ret = r_list_new()))
+		return NULL;
+	ret->free = free;
+	if (!(m = R_NEW0 (RBinMem))) {
+		r_list_free (ret);
+		return NULL;
+	}
+	m->name = strdup ("iram");
+	m->addr = 0x00;
+	m->size = 0x7F;
+	m->perms = r_str_rwx ("rwx");
+	r_list_append (ret, m);
+
+	if (!(m = R_NEW0 (RBinMem)))
+		return ret;
+	m->name = strdup ("xram");
+	m->addr = 0x80;
+	m->size = 0x6F;
+	m->perms = r_str_rwx ("rwx");
+	r_list_append (ret, m);
+
+	return ret;
+}
+
+
 struct r_bin_plugin_t r_bin_plugin_ningb = {
 	.name = "xc800",
 	.desc = "Infineon xc800 r_bin plugin",
