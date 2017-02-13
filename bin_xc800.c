@@ -106,8 +106,100 @@ static RList* symbols(RBinFile *arch) {
 
 	if (!(ptr[8] = R_NEW0 (RBinSymbol)))
 		return ret;
+/*Falta poner la dirección concreta de todas las interrupciones*/
+	
+	ptr[8]->name = strdup ("External Interrupt 0");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
 
-	ptr[8]->name = strdup ("Interrupt_Vblank");
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 1");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 5 (Timer 2)");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 6");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 7");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 8");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 9");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 10");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+	ptr[8]->name = strdup ("External Interrupt 11");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+	
+		
+	ptr[8]->name = strdup ("External Interrupt 12");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+		
+	ptr[8]->name = strdup ("External Interrupt 13");
 	ptr[8]->paddr = ptr[8]->vaddr = 64;
 	ptr[8]->size = 1;
 	ptr[8]->ordinal = 8;
@@ -116,7 +208,7 @@ static RList* symbols(RBinFile *arch) {
 	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
 		return ret;
 
-	ptr[9]->name = strdup ("Interrupt_LCDC-Status");
+	ptr[9]->name = strdup ("Timer 0");
 	ptr[9]->paddr = ptr[9]->vaddr = 72;
 	ptr[9]->size = 1;
 	ptr[9]->ordinal = 9;
@@ -125,7 +217,7 @@ static RList* symbols(RBinFile *arch) {
 	if (!(ptr[10] = R_NEW0 (RBinSymbol)))
 		return ret;
 
-	ptr[10]->name = strdup ("Interrupt_Timer-Overflow");
+	ptr[10]->name = strdup ("Timer 1");
 	ptr[10]->paddr = ptr[10]->vaddr = 80;
 	ptr[10]->size = 1;
 	ptr[10]->ordinal = 10;
@@ -134,7 +226,7 @@ static RList* symbols(RBinFile *arch) {
 	if (!(ptr[11] = R_NEW0 (RBinSymbol)))
 		return ret;
 
-	ptr[11]->name = strdup ("Interrupt_Serial-Transfere");
+	ptr[11]->name = strdup ("UART");
 	ptr[11]->paddr = ptr[11]->vaddr = 88;
 	ptr[11]->size = 1;
 	ptr[11]->ordinal = 11;
@@ -143,7 +235,7 @@ static RList* symbols(RBinFile *arch) {
 	if (!(ptr[12] = R_NEW0 (RBinSymbol)))
 		return ret;
 
-	ptr[12]->name = strdup ("Interrupt_Joypad");
+	ptr[12]->name = strdup ("Non-maskable Interrupt");
 	ptr[12]->paddr = ptr[12]->vaddr = 96;
 	ptr[12]->size = 1;
 	ptr[12]->ordinal = 12;
