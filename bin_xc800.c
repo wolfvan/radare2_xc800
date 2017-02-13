@@ -77,6 +77,82 @@ static RList* sections(RBinFile *arch){
         return ret;
 }
 
+static int destroy(RBinFile *arch) {
+	r_buf_free (arch->buf);
+	arch->buf = NULL;
+	return true;
+}
+
+
+static RList* symbols(RBinFile *arch) {
+	RList *ret = NULL;
+	RBinSymbol *ptr[13];
+	int i;
+	if (!(ret = r_list_new()))
+		return NULL;
+	ret->free = free;
+
+	for (i = 0; i < 8; i++) {
+		if (!(ptr[i] = R_NEW0 (RBinSymbol))) {
+			ret->free (ret);
+			return NULL;
+		}
+		ptr[i]->name = r_str_newf ("rst_%i", i*8);
+		ptr[i]->paddr = ptr[i]->vaddr = i*8;
+		ptr[i]->size = 1;
+		ptr[i]->ordinal = i;
+		r_list_append (ret, ptr[i]);
+	}
+
+	if (!(ptr[8] = R_NEW0 (RBinSymbol)))
+		return ret;
+
+	ptr[8]->name = strdup ("Interrupt_Vblank");
+	ptr[8]->paddr = ptr[8]->vaddr = 64;
+	ptr[8]->size = 1;
+	ptr[8]->ordinal = 8;
+	r_list_append (ret, ptr[8]);
+
+	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
+		return ret;
+
+	ptr[9]->name = strdup ("Interrupt_LCDC-Status");
+	ptr[9]->paddr = ptr[9]->vaddr = 72;
+	ptr[9]->size = 1;
+	ptr[9]->ordinal = 9;
+	r_list_append (ret, ptr[9]);
+
+	if (!(ptr[10] = R_NEW0 (RBinSymbol)))
+		return ret;
+
+	ptr[10]->name = strdup ("Interrupt_Timer-Overflow");
+	ptr[10]->paddr = ptr[10]->vaddr = 80;
+	ptr[10]->size = 1;
+	ptr[10]->ordinal = 10;
+	r_list_append (ret, ptr[10]);
+
+	if (!(ptr[11] = R_NEW0 (RBinSymbol)))
+		return ret;
+
+	ptr[11]->name = strdup ("Interrupt_Serial-Transfere");
+	ptr[11]->paddr = ptr[11]->vaddr = 88;
+	ptr[11]->size = 1;
+	ptr[11]->ordinal = 11;
+	r_list_append (ret, ptr[11]);
+
+	if (!(ptr[12] = R_NEW0 (RBinSymbol)))
+		return ret;
+
+	ptr[12]->name = strdup ("Interrupt_Joypad");
+	ptr[12]->paddr = ptr[12]->vaddr = 96;
+	ptr[12]->size = 1;
+	ptr[12]->ordinal = 12;
+	r_list_append (ret, ptr[12]);
+
+	return ret;
+}
+
+
 RList *mem (RBinFile *arch) {
 	RList *ret;
 	RBinMem *m, *n;
