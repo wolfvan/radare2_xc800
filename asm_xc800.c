@@ -103,26 +103,22 @@ static const char *arg[] = {
 };
 
 static const char *ops[] = {
-	"inc",         // 0.   04 : immed=a
-	"dec",         // 1.   14 : immed=a
-	"add a,",      // 2.
-	"addc a,",     // 3.
-	"orl a,",      // 4.
-	"anl a,",      // 5.
-	"xrl a,",      // 6.
-	"+, $1;mov",   // 7.    74 == immed=a
-	"mov direct,", // 8.    84 == DIV AB
-	"subb a,",     // 9.
-	"+, $1;mov", // A.    A4 == MUL AB
+	"inc",         
+	"dec",         
+	"add a,",      
+	"addc a,",     
+	"orl a,",      
+	"anl a,",      
+	"xrl a,",      
+	"+, $1;mov",   
+	"mov direct,", 
+	"subb a,",     
+	"+, $1;mov",
 	"+, $1, $2;cjne",
-		// B4, B4 = {cjne a, {#immed,direct}, offset}
-		// cjne arg, #immed, offset
-	"xch a,",       // C.   C4 == SWAP A
-	"+, $1;djnz", // D.   D4 = DA
-			//      D5 = DJNZ d,off
-			//      D6,7 = XCHD A, r0,1
-	"mov a,",       // E.   E4 == CLR A
-	"+, a;mov"      // F.   F4 == CPL A
+	"xch a,",       
+	"+, $1;djnz", 
+	"mov a,",       
+	"+, a;mov"      
 };
 
 xc800_op xc800_decode(const ut8 *buf, int len) {
