@@ -13,15 +13,15 @@
 static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	char *tmp = NULL;
 
-	r_8051_op o = r_8051_decode (buf, len);
+	r_xc800_op o = r_xc800_decode (buf, len);
 	memset(op->buf_asm, 0, sizeof (op->buf_asm));
 	if (!o.name) return 0; // invalid instruction
-	tmp = r_8051_disasm (o, a->pc, op->buf_asm, sizeof (op->buf_asm));
+	tmp = r_xc800_disasm (o, a->pc, op->buf_asm, sizeof (op->buf_asm));
 	if (tmp) {
 		if (strlen(tmp) < sizeof (op->buf_asm)) {
 			strncpy (op->buf_asm, tmp, strlen (tmp));
 		} else {
-			eprintf ("8051 disassemble: too big opcode!\n");
+			eprintf ("Too big opcode!\n");
 			free (tmp);
 			op->size = -1;
 			return -1;
