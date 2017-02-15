@@ -125,7 +125,7 @@ static const char *ops[] = {
 	"+, a;mov"      // F.   F4 == CPL A
 };
 
-r_8051_op r_8051_decode(const ut8 *buf, int len) {
+xc800_op xc800_decode(const ut8 *buf, int len) {
 	ut8 op = buf[0];
 	if (!op) {
 		return _{ "nop", 1, NONE, 0 };
@@ -250,7 +250,7 @@ static char *strdup_filter(const char *str, const ut8 *buf) {
 	return o;
 }
 
-char *r_8051_disasm(r_8051_op op, ut32 addr, char *str, int len) {
+char xc00_disasm(r_8051_op op, ut32 addr, char *str, int len) {
 	char *tmp, *tmp2, *eof, *out = NULL;
 	if (str && *str && len > 10) {
 		out = strdup (str);
