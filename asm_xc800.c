@@ -13,10 +13,10 @@
 static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	char *tmp = NULL;
 
-	r_xc800_op o = r_xc800_decode (buf, len);
+	xc800_op o = xc800_decode (buf, len);
 	memset(op->buf_asm, 0, sizeof (op->buf_asm));
 	if (!o.name) return 0; // invalid instruction
-	tmp = r_xc800_disasm (o, a->pc, op->buf_asm, sizeof (op->buf_asm));
+	tmp = xc800_disasm (o, a->pc, op->buf_asm, sizeof (op->buf_asm));
 	if (tmp) {
 		if (strlen(tmp) < sizeof (op->buf_asm)) {
 			strncpy (op->buf_asm, tmp, strlen (tmp));
@@ -90,7 +90,7 @@ RS1 RS0 Working Register Bank and Address
 #include <8051_disas.h>
 
 #undef _
-#define _ (r_8051_op)
+#define _ (xc800_op)
 #define _ARG(x) ARG, 0, x, buf
 #define _ADDR11(x) ADDR11, ((x[1])+((x[0]>>5)<<8)), NULL, buf
 #define _ADDR16(x) ADDR16, ((x[1])<<8)+((x[2])), NULL, buf
