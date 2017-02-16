@@ -442,25 +442,25 @@ static int i8051_hook_reg_write(RAnalEsil *esil, const char *name, ut64 val) {
 	return ret;
 }
 
-static int esil_i8051_init (RAnalEsil *esil) {
+static int esil_xc800_init (RAnalEsil *esil) {
 	if (esil->cb.user) {
 		return true;
 	}
-	esil->cb.user = R_NEW0 (struct r_i8051_user);
+	esil->cb.user = R_NEW0 (struct r_xc800_user);
 	ocbs = esil->cb;
-	esil->cb.hook_reg_read = i8051_hook_reg_read;
-	esil->cb.hook_reg_write = i8051_hook_reg_write;
-	i8051_is_init = true;
+	esil->cb.hook_reg_read = xc800_hook_reg_read;
+	esil->cb.hook_reg_write = xc800_hook_reg_write;
+	xc800_is_init = true;
 	return true;
 }
 
-static int esil_i8051_fini (RAnalEsil *esil) {
-	if (!i8051_is_init) {
+static int esil_xc800_fini (RAnalEsil *esil) {
+	if (!xc800_is_init) {
 		return false;
 	}
 	esil->cb = ocbs;
 	R_FREE (esil->cb.user);
-	i8051_is_init = false;
+	xc800_is_init = false;
 	return true;
 }
 
