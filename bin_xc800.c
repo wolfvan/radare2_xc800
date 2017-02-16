@@ -112,7 +112,7 @@ static RList* symbols(RBinFile *arch) {
 	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
 		return ret;
 	
-	ptr[8]->name = strdup ("External Interrupt 1");
+	ptr[8]->name = strdup ("Timer 0");
 	ptr[8]->paddr = ptr[8]->vaddr = 11;
 	ptr[8]->size = 1;
 	ptr[8]->ordinal = 8;
@@ -121,7 +121,7 @@ static RList* symbols(RBinFile *arch) {
 	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
 		return ret;
 	
-	ptr[8]->name = strdup ("External Interrupt 5 (Timer 2)");
+	ptr[8]->name = strdup ("External Interrupt 1");
 	ptr[8]->paddr = ptr[8]->vaddr = 19;
 	ptr[8]->size = 1;
 	ptr[8]->ordinal = 8;
