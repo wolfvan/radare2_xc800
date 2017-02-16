@@ -81,7 +81,7 @@ static int destroy(RBinFile *arch) {
 
 static RList* symbols(RBinFile *arch) {
 	RList *ret = NULL;
-	RBinSymbol *ptr[13];
+	RBinSymbol *ptr[15];
 	int i;
 	if (!(ret = r_list_new()))
 		return NULL;
