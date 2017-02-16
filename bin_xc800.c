@@ -103,29 +103,29 @@ static RList* symbols(RBinFile *arch) {
 		return ret;
 /*Falta poner la dirección concreta de todas las interrupciones*/
 	
-	ptr[8]->name = strdup ("External Interrupt 0");
-	ptr[8]->paddr = ptr[8]->vaddr = 3;
-	ptr[8]->size = 1;
-	ptr[8]->ordinal = 8;
-	r_list_append (ret, ptr[8]);
+	ptr[0]->name = strdup ("External Interrupt 0");
+	ptr[0]->paddr = ptr[8]->vaddr = 3;
+	ptr[0]->size = 1;
+	ptr[0]->ordinal = 0;
+	r_list_append (ret, ptr[0]);
 
 	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
 		return ret;
 	
-	ptr[8]->name = strdup ("Timer 0");
-	ptr[8]->paddr = ptr[8]->vaddr = 11;
-	ptr[8]->size = 1;
-	ptr[8]->ordinal = 8;
-	r_list_append (ret, ptr[8]);
+	ptr[1]->name = strdup ("Timer 0");
+	ptr[1]->paddr = ptr[1]->vaddr = 11;
+	ptr[1]->size = 1;
+	ptr[1]->ordinal = 1;
+	r_list_append (ret, ptr[1]);
 
 	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
 		return ret;
 	
-	ptr[8]->name = strdup ("External Interrupt 1");
-	ptr[8]->paddr = ptr[8]->vaddr = 19;
-	ptr[8]->size = 1;
-	ptr[8]->ordinal = 8;
-	r_list_append (ret, ptr[8]);
+	ptr[2]->name = strdup ("External Interrupt 1");
+	ptr[2]->paddr = ptr[2]->vaddr = 19;
+	ptr[2]->size = 1;
+	ptr[2]->ordinal = 2;
+	r_list_append (ret, ptr[2]);
 
 	if (!(ptr[9] = R_NEW0 (RBinSymbol)))
 		return ret;
