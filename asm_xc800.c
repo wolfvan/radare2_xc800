@@ -212,7 +212,7 @@ static char *strdup_filter(const char *str, const ut8 *buf) {
 	return o;
 }
 
-char xc00_disasm(r_8051_op op, ut32 addr, char *str, int len) {
+char xc00_disasm(r_xc800_op op, ut32 addr, char *str, int len) {
 	char *tmp, *tmp2, *eof, *out = NULL;
 	if (str && *str && len > 10) {
 		out = strdup (str);
