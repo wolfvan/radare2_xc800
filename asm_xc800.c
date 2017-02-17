@@ -8,7 +8,7 @@
 #include <r_lib.h>
 #include <r_asm.h>
 
-#include <8051_disas.h>
+
 
 static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	char *tmp = NULL;
@@ -262,16 +262,3 @@ char xc00_disasm(r_8051_op op, ut32 addr, char *str, int len) {
 	return out;
 }
 
-#if MAIN
-
-int main() {
-	char *str;
-	ut8 buf[3] = { 0xb3, 0x11, 0x22 };
-	r_8051_ op = r_8051_decode (buf, sizeof (buf));
-	str = r_8051_disasm (op, 0, NULL, 0);
-	eprintf ("%s\n", str);
-	free (str);
-	return 0;
-}
-
-#endif
