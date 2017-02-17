@@ -54,40 +54,8 @@ struct r_lib_struct_t radare_plugin = {
 };
 #endif
 
-
-
-#if 0
-http://www.keil.com/support/man/docs/is51/is51_instructions.htm
-http://www.keil.com/support/man/docs/is51/is51_opcodes.htm
-// TODO: extend support for 251
-The classic 8051 provides 4 register banks of 8 registers each.
-These register banks are mapped into the DATA memory area at
-address 0 - 0x1F. In addition the CPU provides a 8-bit A
-(accumulator) and B register and a 16-bit DPTR (data pointer)
-for addressing XDATA and CODE memory. These registers are also
-mapped into the SFR space as special function registers.
-|-----------------------|
- r0 r1 r2 r3 r4 r5 r6 r7  0x00
- r0 r1 r2 r3 r4 r5 r6 r7  0x08
- r0 r1 r2 r3 r4 r5 r6 r7  0x10
- r0 r1 r2 r3 r4 r5 r6 r7  0x18
-A = acumulator
-B = general purpose
-DPTR = 16 bit pointer to data
-PSW1 - status word register
-Bit 7	Bit 6	Bit 5	Bit 4	Bit 3	Bit 2	Bit 1	Bit 0
-CY	AC	N	RS1	RS0	OV	Z	-
-The following table describes the status bits in the PSW:
-RS1 RS0 Working Register Bank and Address
-0 0 Bank0 (D:0x00 - D:0x07)
-0 1 Bank1 (D:0x08 - D:0x0F)
-1 0 Bank2 (D:0x10 - D:0x17)
-1 1 Bank3 (D:0x18H - D:0x1F)
-#endif
-
 #include <r_types.h>
 
-#include <8051_disas.h>
 
 #undef _
 #define _ (xc800_op)
@@ -177,18 +145,16 @@ xc800_op xc800_decode(const ut8 *buf, int len) {
 	case 0xf3: return _{ "movx @r1, a", 1, NONE };
 	case 0x74: return _{ "mov a,", 2, _DIRECT(buf) };
 	}
-	// general opcodes
+
 	if ((op&0xf)>=4) {
 		int opidx = (op>>4);
 		int argidx = (op&0xf)-4;
 		const char *opstr = ops[opidx];
 		const char *argstr = arg[argidx];
 		int length = ((op&0xf)<6)? 2: 1;
-		/* exceptions */
 		switch (op) {
 		case 0x04: length = 1; opstr = "inc a"; argstr=""; break;
 		case 0x14: length = 1; opstr = "dec a"; break;
-   // XXX: 75 opcode is wrong
 		case 0x75: opstr = "mov $1, #RAM_D0"; argstr=""; length = 3; break;
 		case 0xa4: opstr = "mul ab"; break;
 		case 0xa5: opstr = "reserved"; break;
@@ -201,7 +167,7 @@ xc800_op xc800_decode(const ut8 *buf, int len) {
 		case 0xe4: opstr = "clr a"; argstr=""; length = 1; break;
 		case 0xf4: opstr = "cpl a"; break;
 		}
-		/* exceptions */
+
 		if (op==0x06) length = 2;
 		else if (op==0x84) length = 1;
 		else if (op==0x85) length = 3;
@@ -211,7 +177,7 @@ xc800_op xc800_decode(const ut8 *buf, int len) {
 		else if (op >= 0xb4 && op <= 0xbf) length = 3;
 		return _{ opstr, length, _ARG (argstr) };
 	}
-	return _{ "xxx", 0, 0 }; // XXX
+	return _{ "xxx", 0, 0 };
 }
 
 static char *strdup_filter(const char *str, const ut8 *buf) {
