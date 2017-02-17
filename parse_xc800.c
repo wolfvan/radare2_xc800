@@ -60,7 +60,6 @@ static int replace(int argc, const char *argv[], char *newstr) {
 		}
 	}
 
-	/* TODO: this is slow */
 	if (newstr != NULL) {
 		newstr[0] = '\0';
 		for (i=0; i<argc; i++) {
@@ -72,7 +71,7 @@ static int replace(int argc, const char *argv[], char *newstr) {
 	return false;
 }
 
-struct r_parse_plugin_t r_parse_plugin_z80_pseudo = {
+struct r_parse_plugin_t r_parse_plugin_xc800_pseudo = {
 	.name = "xc800.pseudo",
 	.desc = "Infineon xc800 pseudo syntax",
 	.init = NULL,
