@@ -15,7 +15,7 @@ static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 
 	xc800_op o = xc800_decode (buf, len);
 	memset(op->buf_asm, 0, sizeof (op->buf_asm));
-	if (!o.name) return 0; // invalid instruction
+	if (!o.name) return 0; 
 	tmp = xc800_disasm (o, a->pc, op->buf_asm, sizeof (op->buf_asm));
 	if (tmp) {
 		if (strlen(tmp) < sizeof (op->buf_asm)) {
@@ -202,7 +202,7 @@ static char *strdup_filter(const char *str, const ut8 *buf) {
 				i++;
 				j += sprintf (o + j, "0x%02x", buf[n]);
 			} else {
-				eprintf ("strdup_filter: Internal bug\n");
+				eprintf ("Internal bug\n");
 			}
 		} else {
 			o[j++] = str[i];
@@ -252,7 +252,7 @@ char xc00_disasm(r_8051_op op, ut32 addr, char *str, int len) {
 			free (tmp);
 			free (tmp2);
 		} else {
-			eprintf ("do8051disasm: Internal bug\n");
+			eprintf ("Internal bug\n");
 		}
 	} else {
 		tmp = out;
